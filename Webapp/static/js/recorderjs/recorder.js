@@ -19,7 +19,7 @@ DEALINGS IN THE SOFTWARE.
 
 (function(window){
 
-  var WORKER_PATH = 'js/recorderjs/recorderWorker.js';
+  var WORKER_PATH = 'static/js/recorderjs/recorderWorker.js';
 
   var Recorder = function(source, cfg){
     var config = cfg || {};
@@ -107,10 +107,24 @@ DEALINGS IN THE SOFTWARE.
   };
 
   Recorder.setupDownload = function(blob, filename){
-    var url = (window.URL || window.webkitURL).createObjectURL(blob);
-    var link = document.getElementById("save");
-    link.href = url;
-    link.download = filename || 'output.wav';
+    console.log(blob);
+    var fd = new FormData();
+    fd.append('data', blob);
+    $.ajax({
+      type: 'POST',
+      url: '/audio_save',
+      data: fd,
+      processData: false,
+      contentType: false
+    }).done(function(data) {
+           console.log(data);
+    });
+
+    // var url = (window.URL || window.webkitURL).createObjectURL(blob);
+    // var link = document.getElementById("save");
+    // link.href = url;
+    // link.download = filename || 'output.wav';
+    // document.getElementById('save').click();
   }
 
   window.Recorder = Recorder;
