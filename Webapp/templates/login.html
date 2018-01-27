@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<script type="text/javascript">
+		    var vpw = (screen.width<560)?'560':'device-width';
+		    document.write('<meta name="viewport" content="width='+vpw+'" >');
+		</script>
+        <title>Price Monitoring - Login</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='semanticui/semantic.min.css')}}" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+		
+        <style type="text/css">
+         body {
+             background-color: #DADADA;
+         }
+         body > .grid {
+             height: 100%;
+         }
+         .image {
+             margin-top: -100px;
+         }
+         .column {
+             max-width: 450px;
+         }
+        </style>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.0.0.min.js')}}"></script>
+        <script>
+		$(document).ready(function() {
+			$('.ui.form').form({
+	          fields: {
+	            username: {
+	              identifier  : 'username',
+	              rules: [
+	                {
+	                  type   : 'empty',
+	                  prompt : 'Please enter your username'
+	                }
+	              ]
+	            },
+	            password: {
+	              identifier  : 'password',
+	              rules: [
+	                {
+	                  type   : 'empty',
+	                  prompt : 'Please enter your password'
+	                }
+	              ]
+	            }
+	          }
+	        })
+	      ;
+	    })
+	  ;
+        </script>
+    </head>
+    <body>
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui blue image header">
+                    <div class="content">
+                        Log-in to your account
+                    </div>
+                </h2>
+                <form class="ui large form" method="POST" action="{{ url_for('login') }}">
+                    <div class="ui stacked segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <button type="submit" class="ui fluid large blue submit button">Login</button>
+                    </div>
+
+                    <div class="ui error message">
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								<style>
+								.ui.form .error.message {display: block;}
+								.ui.message .list:not(.ui) {margin-top: 0;}
+								</style>
+								<ul class='list'>
+								{% for message in messages %}
+									<li>{{message}}</li>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- JAVSCRIPT -->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.0.0.min.js')}}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='semanticui/semantic.min.js')}}"></script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-83986068-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+    </body>
+</html>
