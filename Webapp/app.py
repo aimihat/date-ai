@@ -98,6 +98,11 @@ def dict_factory(cursor, row):
 		d[col[0]] = row[idx]
 	return d
 
+@app.route('/audio_save', methods=['POST'])
+def audio_save():
+	print(request.form)
+	return json.dumps(True)
+
 @app.route('/camera')
 def camera():
 	with open('session_count.txt', 'w') as f:

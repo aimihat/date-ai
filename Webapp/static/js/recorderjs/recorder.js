@@ -31,7 +31,7 @@ DEALINGS IN THE SOFTWARE.
        this.node = this.context.createScriptProcessor(bufferLen, 2, 2);
     }
    
-    var worker = new Worker(config.workerPath || WORKER_PATH);
+    var worker = new Worker(WORKER_PATH);
     worker.postMessage({
       command: 'init',
       config: {
@@ -109,6 +109,7 @@ DEALINGS IN THE SOFTWARE.
   Recorder.setupDownload = function(blob, filename){
     console.log(blob);
     var fd = new FormData();
+    fd.append('fname', 'test.wav');
     fd.append('data', blob);
     $.ajax({
       type: 'POST',

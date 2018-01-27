@@ -65,6 +65,10 @@ function takephoto() {
 			console.log(result);
 		})
 	}
-
 }
+window.setInterval(function(){
+  takephoto()
+}, 5000);
+setTimeout(startRecording, 3000);
+setTimeout(stopRecording, 10000);
 </script>
