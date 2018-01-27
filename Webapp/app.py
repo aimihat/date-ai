@@ -4,28 +4,20 @@
 import os
 import sys
 from importlib import reload
-import json
-import datetime
-import sqlite3
-import csv
 import io
 import requests
 import json
-import subprocess
+import base64
 
-from flask import Flask, request, session, g, redirect, url_for, abort, \
-	render_template, flash, Markup, jsonify, make_response
 
-# for login
 from flask_bcrypt import check_password_hash, generate_password_hash
 from flask_login import (LoginManager, login_user, logout_user,
 						 login_required, current_user)
 
-import numpy as np
-import pandas as pd
-from pandas import DataFrame
-from functools import wraps
-from collections import OrderedDict
+
+from flask import Flask, request, session, g, redirect, url_for, abort, \
+	render_template, flash, Markup, jsonify, make_response
+
 from werkzeug.contrib.profiler import ProfilerMiddleware
 from xlsxwriter.utility import xl_rowcol_to_cell
 
@@ -41,33 +33,17 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-
-@login_manager.user_loader
-def load_user(userid):
-	try:
-		return models.Users.get(models.Users.id == userid)
-	except models.DoesNotExist:
-		return None
-
-
 @app.before_request
 def before_request():
 	"""
 	Connect to the database before each request
 	"""
-	g.user = current_user
+	with open('session_count.txt', 'r') as f:
+		g.session = int([x for x in f.readlines()][0])
 	g.version = 1 #Used for updating cached assets in templates
 
 @app.after_request
 def after_request(response):
-	"""
-	Close the database connection after each request
-	"""
-	try:
-		g.conn.close()
-		g.stats.close()
-	except:
-		pass
 	return response
 
 
@@ -99,6 +75,22 @@ def logout():
 	flash('You have been logged out!', 'success')
 	return redirect(url_for('index'))
 
+@app.route('/save_image', methods=['POST'])
+def save_image():
+	#print(request.form['image'].split(',')[1].decode('base64'))
+	img_data = base64.b64decode(request.form['image'].split(',')[1])#.split(',')[1])
+	directory = 'sessions/'+str(g.session)
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+
+	i = 0
+	while os.path.exists(directory+'/'+str(i)+'.png'):
+		i += 1
+
+	with open(directory+'/'+str(i)+'.png', "wb") as fh:
+		fh.write(img_data)
+		
+	return json.dumps(True)
 
 def dict_factory(cursor, row):
 	d = {}
@@ -108,11 +100,14 @@ def dict_factory(cursor, row):
 
 @app.route('/camera')
 def camera():
+	with open('session_count.txt', 'w') as f:
+		f.write(str(g.session+1))
 	return render_template('camera.html')
+
 @app.route("/")
 def index():
 	return render_template('index.html')
 
 
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0', port=8200)
+	app.run(debug=True, host='localhost', port=8200)

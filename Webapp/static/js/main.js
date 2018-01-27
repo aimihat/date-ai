@@ -1,20 +1,19 @@
 
 $(document).ready(function(){
     //First page
-    var first_click = true;
     $('a.primary-btn.d-inline-flex.align-items-center').click(function(){
-        if (first_click) {
-        var text = '<a href="#" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">'
+        var text = '<a href="#" class="primary-btn gender d-inline-flex align-items-center"><span class="mr-10">'
         var text2 = '</span></a>';
         $(this).replaceWith(text+'Male'+text2+text+'Female'+text2);
         $('.mr-10').css('margin-right','0px');
         $('a.primary-btn.d-inline-flex.align-items-center').css('margin-right','10px');
-    } else {
-        $.get('/camera', data, function(result) {
-            $(".banner-area").html(result);
-        });
-    }
+        $('a.gender').click(function(){
+        $.get('/camera', function(result) {
+                $(".banner-area").html(result);
+            });
+        })
     })
+    
 
 	var window_width 	 = $(window).width(),
 	window_height 		 = window.innerHeight,
