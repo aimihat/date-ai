@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>date.ai</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='semanticui/semantic.min.css')}}" />
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.0.0.min.js')}}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css')}}" />
+</head>
+<body>
+	<div class="ui container">
+	<div>
+		<h1 class="main-title">Date.ai</h1>
+		<h2 class="subtitle">Learn how to get all the good girls </h2>
+	</div>
+
+	<a href="#" class="boton">
+	Fantastic    
+	</a>
+	</div>
+
+	<script type="text/javascript">
+		$(window).ready(function(){
+$(".boton").wrapInner('<div class=botontext></div>');
+    
+    $(".botontext").clone().appendTo( $(".boton") );
+    
+    $(".boton").append('<span class="twist"></span><span class="twist"></span><span class="twist"></span><span class="twist"></span>');
+    
+    $(".twist").css("width", "25%").css("width", "+=3px");
+});
+	</script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.0.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='semanticui/semantic.min.js')}}"></script>
+</body>
+</html>
