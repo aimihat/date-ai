@@ -1,0 +1,67 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Jan 27 14:03:26 2018
+
+@author: aravind_
+"""
+
+def tts(response):
+    from gtts import gTTS
+    import os
+    tts = gTTS(text=response, lang='en')
+    tts.save("good.mp3")
+    os.system("mpg321 good.mp3")
+    
+from chatterbot import ChatBot
+chatbot = ChatBot("New")
+
+from chatterbot.trainers import ListTrainer
+
+chatterbot = ChatBot("Training Example")
+chatterbot.set_trainer(ListTrainer)
+
+chatterbot.train([
+    "Hey!",
+    "Hello",
+    "How are you?",
+    "I am good, thanks.",
+    "What's your name?",
+    "My name is Arani. And yours?",
+    "My name is Aravind. What are you working?",
+    "I am working on my compiler project.",
+    "Oh that's soo cool!",
+])
+
+chatterbot.train([
+    "Do you want to get coffee?",    
+    "I will let you know.",
+])
+
+
+chatterbot.train([
+    "What is your phone number?",    
+    "I don't have a phone. Sorry!",
+])
+
+chatterbot.train([
+    "You look very pretty.",    
+    "Why, thank you. Same to you.",
+])
+    
+from chatterbot.trainers import ChatterBotCorpusTrainer
+
+
+chatterbot = ChatBot("Training Example")
+chatterbot.set_trainer(ChatterBotCorpusTrainer)
+
+chatterbot.train(
+
+#    "chatterbot.corpus.english.conversations",
+#    "chatterbot.corpus.english.greetings",        
+
+)
+
+
+response = chatbot.get_response("Good morning!")
+tts(str(response))
