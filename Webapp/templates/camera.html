@@ -2,17 +2,19 @@
 start chrome with --unsafely-treat-insecure-origin-as-secure="example.com"
 for it to work
 -->
-<h3>Level 1 - Interactions</h3>
+<h3 class="level">Level 1 - Interactions</h3>
 <nav>
-	<ol class="cd-breadcrumb">
-		<li><a href="#0">Home</a></li>
-		<li><a href="#0">Gallery</a></li>
-		<li><a href="#0">Web</a></li>
-		<li class="current"><em>Project</em></li>
-	</ol>
-</nav>
-<video muted autoplay class="video-feedback" width="200px" height="200px"></video>
-<canvas style="display: none;"></canvas>
+		<ol class="cd-multi-steps text-top">
+			<li class="visited"><a href="#0">Ask</a></li>
+			<li class="current" ><a href="#0"><em>Date</em></a></li>
+			<li class=""><em>Date</em></li>
+			<li><em>Sex</em></li>
+		</ol>
+	</nav>
+	<div class="conversation-panel">
+		<video muted autoplay class="video-feedback" width="150px" height="114px"></video>
+		<canvas style="display: none;"></canvas>
+	</div>
 <script language="javascript" type="text/javascript">
 function onVideoFail(e) {
     console.log('webcam fail!', e);

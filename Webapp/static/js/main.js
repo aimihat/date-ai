@@ -9,7 +9,9 @@ $(document).ready(function(){
         $('a.primary-btn.d-inline-flex.align-items-center').css('margin-right','10px');
         $('a.gender').click(function(){
         $.get('/camera', function(result) {
-                $(".banner-area").html(result);
+                $(".banner-area .container .row").html(result);
+                $(".banner-area").css('background','transparent')
+                $('.banner-area .container .row').removeClass("align-items-center")
             });
         })
     })

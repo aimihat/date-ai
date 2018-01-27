@@ -1,8 +1,50 @@
+.conversation-panel {
+  width: 45%;
+  height: 450px;
+  margin: 0 auto;
+  position: relative;
+  background: url('../images/girl.jpg?v2');
+  background-size: cover;
+  border: 2px solid #ED557A;
+}
 .logo-title {
   font-size: 40px;
   color: white;
 }
+.video-feedback { 
+    border-top: 2px solid #ED557A;
+    border-left: 2px solid #ED557A;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.logo {
+    position: absolute;
+    top: 25px;
+    left: 50px;
+}
+.cd-multi-steps.text-top li > *::before, .cd-multi-steps li.visited::after, .cd-multi-steps.text-bottom li::after,.cd-multi-steps.text-top li.visited > *::before, .cd-multi-steps.text-top li.current > *::before, .cd-multi-steps.text-bottom li.visited > *::before, .cd-multi-steps.text-bottom li.current > *::before {
+  background: #ED557A!important;
+}
+.banner-area .container {
+  padding-top: 25px;
+}
+h3.level {
+  color: #9E1E3A;
+}
+.row.justify-content-center.height {
+  display: block;
+  text-align: center;
+}
+.row.justify-content-center.height.align-items-center {
+  display: flex;
+}
 
+nav {
+  width: 100%;
+  margin: 0!important;
+  display: block;
+}
 /*--------------------------- Color variations ----------------------*/
 /* Medium Layout: 1280px */
 /* Tablet Layout: 768px */
