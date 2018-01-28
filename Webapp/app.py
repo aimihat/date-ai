@@ -142,8 +142,8 @@ def audio_save():
 def analyze():
 	#print(request.form['image'].split(',')[1].decode('base64'))
 	# audio = base64.b64decode(request.form['audio'])#.split(',')[1])
-	# directory = 'sessions/'+str(g.session)
-	directory = 'sessions/31/'
+	directory = 'sessions/'+str(g.session)
+	# directory = 'sessions/31/'
 	
 	fillers = Analysis.TraitAnalysis.fillerWord(directory + 'results_speech.csv')
 	intersestScoreSpeech = Analysis.TraitAnalysis.intersestScoreSpeech(directory + 'results_speech.csv')
