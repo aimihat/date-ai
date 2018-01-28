@@ -35,7 +35,7 @@ def speechToText(DIR, fileName):
 		return;
 	[text, score] = Transcribe.getText(DIR + fileName)
 	with open(DIR + "results_speech.csv", "a") as myfile:
-		myfile.write(str(score)+","+text);
+		myfile.write(str(score)+","+text+"\n");
 	return text
 
 # processFrame(DIR, "36.png")
