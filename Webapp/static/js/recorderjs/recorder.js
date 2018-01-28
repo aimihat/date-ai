@@ -114,10 +114,14 @@ DEALINGS IN THE SOFTWARE.
        base64 = base64.split(',')[1];
        $.post('/audio_save', data={'audio':base64}, function(result){
         result = JSON.parse(result);
-        $('.transcript .texts').append('<li>'+result['text']+'<br>'+result['response']+'</li>')
-        $('.tlt').textillate();
+        $('.transcript .text p').html(result['text']+"<br>"+result['response']).textillate();
         console.log('playing'+result);
         count++;
+        console.log(count);
+        if (count > 4) {
+        
+        $(".achievement").css('opacity','1');
+       }
         new Audio(result["url"]+'?'+count.toString()).play() //url is result
        })
 

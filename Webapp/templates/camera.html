@@ -2,27 +2,36 @@
 start chrome with --unsafely-treat-insecure-origin-as-secure="example.com"
 for it to work
 -->
-<h3 class="level">Level 1 - Interactions</h3>
+<h3 class="level">Dating Challenges - Level 1</h3>
 <nav>
 		<ol class="cd-multi-steps text-top">
-			<li class="visited"><a href="#0">Ask</a></li>
-			<li class="current" ><a href="#0"><em>Date</em></a></li>
+			<li class="visited"><a href="#0">Tutorial</a></li>
+			<li class="current"><a href="#0">Ask OUT</a></li>
+			<li class="" ><a href="#0"><em>Date</em></a></li>
 			<li class=""><em>Date</em></li>
-			<li><em>Sex</em></li>
+			<li><em>Walk</em></li>
 		</ol>
 	</nav>
+	<div class="achievement out">
+    <span class="heart">
+        
+    </span>
+    <span class="textss">Level passed<br/>
+    Click for your feedback!</span>
+  
+</div>
 	<div class="conversation-panel">
 		<video muted autoplay class="video-feedback" width="150px" height="114px"></video>
 		<canvas style="display: none;"></canvas>
 	</div>
 	<div class="transcript">
 		<div class="text tlt">
-			<ul class="texts">
-		         <li></li>   
-		         <li></li>
-		    </ul>
+			<p></p>
 		</div>
 	</div>
+
+
+
 <script language="javascript" type="text/javascript">
 function onVideoFail(e) {
     console.log('webcam fail!', e);
@@ -76,7 +85,7 @@ function takephoto() {
 }
 window.setInterval(function(){
   takephoto()
-}, 5000);
+}, 10000);
 
 // Record based on keyboard hold
 // A map to remember in

@@ -16,6 +16,7 @@ hard_coded = {
     'hey': 'hi there',
     'how are you':"I am good, thanks. How are you?",
     "what is your name":"My name is Shreya. What's your name?",
+    "what's your name":"My name is Shreya. What's your name?",
     "what are you working":"I am working on my compiler project.",
     "did you go to the class yesterday":"Yes, I did. It was a very interesting class. I think the professor is really good",
     "what is your phone number":"I don't have a phone. Sorry!",

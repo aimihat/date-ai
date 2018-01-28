@@ -1,3 +1,98 @@
+.heart {
+  background-color: #ED5D7D;
+  display: inline-block;
+  height: 30px;
+  margin: 0 10px;
+  position: absolute;
+  top: 20px;
+  left: 21px;
+  transform: rotate(-45deg);
+  width: 30px;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: #ED5D7D;
+  border-radius: 50%;
+  height: 30px;
+  position: absolute;
+  width: 30px;
+}
+
+.heart:before {
+  top: -15px;
+  left: 0;
+}
+
+.heart:after {
+  left: 15px;
+  top: 0;
+}
+.achievement {
+    width: 64px;
+    height: 64px;
+    background-color: #9E1E3A;
+    border-radius: 32px;
+    position: absolute;
+    z-index: 999;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    transition: width 1s;
+    overflow: hidden;
+}
+.achievement.out {
+    width: 422px;
+}
+.circle {
+    background: white;
+    width: 58px;
+    height: 58px;
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 30px;
+}
+.circle span:nth-child(1) {
+    border-radius: 25px 0 0 0;
+    -moz-border-radius: 25px 0 0 0;
+    -webkit-border-radius: 25px 0 0 0;
+    background-color: #75aa1e;
+}
+.circle span:nth-child(2) {
+    border-radius: 0px 25px 0 0;
+    -moz-border-radius: 0 25px 0 0;
+    -webkit-border-radius: 0 25px 0 0;
+    left: 30px;
+}
+.circle span:nth-child(3) {
+    border-radius: 0 0 25px 0;
+    -moz-border-radius: 0 0 25px 0;
+    -webkit-border-radius: 0 0 25px 0;
+    left: 30px;
+    top: 30px;
+}
+.circle span:nth-child(4) {
+    border-radius: 0 0 0 25px;
+    -moz-border-radius: 0 0 0 25px;
+    -webkit-border-radius: 0 0 0 25px;
+    top: 30px;
+}
+.textss {
+  position: absolute;
+    left: 85px;
+    top: 7px;
+    color: #fff;
+    font-size: 1.6em;
+    white-space: nowrap
+}
+
+
 .conversation-panel {
   width: 45%;
   height: 450px;
@@ -7,12 +102,15 @@
   background-size: cover;
   border: 2px solid #ED557A;
 }
+.cd-multi-steps li {
+  white-space: nowrap;
+}
 .logo-title {
   font-size: 40px;
   color: white;
 }
 .video-feedback { 
-    border-top: 2px solid #ED557A;
+    border-top: 3px solid #ED557A;
     border-left: 2px solid #ED557A;
     position: absolute;
     bottom: 0;
