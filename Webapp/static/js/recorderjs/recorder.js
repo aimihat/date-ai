@@ -114,15 +114,15 @@ DEALINGS IN THE SOFTWARE.
        base64 = base64.split(',')[1];
        $.post('/audio_save', data={'audio':base64}, function(result){
         result = JSON.parse(result);
-        $('.transcript .text p').html(result['text']+"<br>"+result['response']).textillate();
+        $('.transcript .text p').html(result['text']+"<br>"+result['response']);
         console.log('playing'+result);
         count++;
         console.log(count);
         speakText(result["response"])
-        if (count > 5) {
+        if (count > 4) {
         
         $(".achievement").css('opacity','1');
-        speakText("What's your number? We could go have dinner some day in huxley?")
+        //speakText("What's your number? We could go have dinner some day in huxley?")
        }
         
         //new Audio(result["url"]+'?'+count.toString()).play() //url is result

@@ -127,7 +127,7 @@ def audio_save():
 	#call endpoint to with path to get stt
 	text = Analysis.Analyze.speechToText(directory+'/', 'audio'+str(i)+'.wav')
 	#response = str(chatbot.get_response(text))
-	if not text.lower() in hard_coded:
+	if not text.lower().strip().replace(",","").replace(".","") in hard_coded:
 		r='http://www.cleverbot.com/getreply'
 		d = {'key':'CC6wwsZu_c50FJ9mMPyRjXHbl7Q','input':text}
 		r = requests.get(r,d).text
@@ -149,7 +149,10 @@ def analyze_api():
 	intersestScoreSpeech = Analysis.TraitAnalysis.intersestScoreSpeech(directory + 'results_speech.csv')
 	intersestScoreSpeech = round(intersestScoreSpeech,2)
 	intersestScoreVideo = Analysis.TraitAnalysis.intersestScoreVideo(directory + 'results_image.csv')
+	intersestScoreVideo = round(intersestScoreVideo,2)
 	nervousnessScoreVideo = Analysis.TraitAnalysis.nervousnessScoreVideo(directory + 'results_image.csv')
+	print('nervousnessScoreVideo',nervousnessScoreVideo)
+	nervousnessScoreVideo = round(nervousnessScoreVideo,2)
 
 	speedScore = Analysis.TraitAnalysis.getSpeedScore(directory)
 	return json.dumps({'fillers':fillers,'intersestScoreSpeech':intersestScoreSpeech,'intersestScoreVideo':intersestScoreVideo,

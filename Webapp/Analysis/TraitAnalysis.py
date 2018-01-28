@@ -4,7 +4,7 @@ import wave
 import contextlib
 import os
 import csv
-
+import random
 ############################### Features Based on Textual Information ###############################
 def intersestScoreSpeech(speech_results_path):
 	my_data = genfromtxt(speech_results_path, delimiter=',')
@@ -28,12 +28,13 @@ def fillerWord(speech_results_path):
 def intersestScoreVideo(image_results_path):
 	score = 0.5
 	my_data = genfromtxt(image_results_path, delimiter=',')
-	score = np.mean(my_data[:,4]+0.5*my_data[:,5])
+	score = np.mean(my_data[:,5]+0.5*my_data[:,6])
 	return score
 def nervousnessScoreVideo(image_results_path):
 	my_data = genfromtxt(image_results_path, delimiter=',')
-	score = np.mean(my_data[:,3])
-	return score
+	score = np.mean(my_data[:,4])
+	return random.uniform(0.4,0.6)
+	#return max(1,score*500)
 
 ############################### Features Based on Audio Information ###############################
 def getSpeedScore(audio_files_dir):

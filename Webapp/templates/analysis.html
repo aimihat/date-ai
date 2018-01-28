@@ -112,7 +112,7 @@ for it to work
     console.log(stats);
     var engagement = stats.intersestScoreVideo*100;
     $('.indicator.engagement').text(engagement.toString()+'%');
-    var confidence = (1-stats.nervousnessScoreVideo)*100;
+    var confidence = Math.round((1-stats.nervousnessScoreVideo)*100);
     $('.indicator.confidence').text(confidence.toString()+'%');
     var enthusiasm = stats['intersestScoreSpeech']*100;
     $('.indicator.enthusiasm').text(enthusiasm.toString()+'%');
