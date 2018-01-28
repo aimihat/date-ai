@@ -1,9 +1,11 @@
-#DIR = "../sessions/100/";
+DIR = "../sessions/100/";
 
-import urllib, base64
+import httplib, urllib, base64
 import json
-from Analysis import ImageEmotion, Transcribe
+import ImageEmotion
+import Transcribe
 import numpy as np
+import TraitAnalysis
 
 import os
 
@@ -14,8 +16,9 @@ def processFrame(DIR, fileName):
 		return;
 	# Scores are for (anger, contempt, disgust, fear, happiness, neutral, sadness, surprise)
 	scores = ImageEmotion.emotionAPI(DIR + fileName);
-	if(scores is None or  len(scores)>0):
+	if(scores is not None or  len(scores)>0):
 		with open(DIR + "results_image.csv", "a") as myfile:
+			print(scores[0])
 			myfile.write(str(scores[0]));
 			for score in scores:
 				myfile.write("," + str(score));
@@ -23,7 +26,8 @@ def processFrame(DIR, fileName):
 			myfile.close()
 
 def resetDirectory(DIR):
-	os.remove(DIR + "results.csv")
+	os.remove(DIR + "results_speech.csv")
+	os.remove(DIR + "results_image.csv")
 
 def speechToText(DIR, fileName):
 	if(fileName.find(".wav")==-1):
@@ -31,16 +35,19 @@ def speechToText(DIR, fileName):
 		return;
 	[text, score] = Transcribe.getText(DIR + fileName)
 	with open(DIR + "results_speech.csv", "a") as myfile:
-		myfile.write(str(score)+"\n");
+		myfile.write(str(score)+","+text);
 	return text
 
+# processFrame(DIR, "36.png")
+# speechToText(DIR, "audio_1.wav")
+# def myTest():
+# 	arr = os.listdir(DIR)
+# 	#resetDirectory(DIR)
+# 	if(False):
+# 		for i in range(len(arr)):
+# 			allScores = [];
+# 			if(arr[i].find('png')!=-1):
+# 				# Scores are for (anger, contempt, disgust, fear, happiness, neutral, sadness, surprise)
+# 				processFrame(DIR, arr[i])
 
-#processFrame(DIR, "36.png")
-#speechToText(DIR, "audio_1.wav")
-
-# resetDirectory(DIR)
-# for i in range(len(arr)):
-# 	allScores = [];
-# 	if(arr[i].find('png')!=-1):
-# 		# Scores are for (anger, contempt, disgust, fear, happiness, neutral, sadness, surprise)
-# 		processFrame(DIR, arr[i])
+# myTest()

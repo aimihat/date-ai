@@ -1,5 +1,5 @@
 ########### Python 2.7 #############
-import http.client, urllib, base64
+import httplib, urllib, base64
 import json
 import numpy as np
 
@@ -9,7 +9,7 @@ headers = {
     'Ocp-Apim-Subscription-Key': '3ce0e2d17845482c9587c8b4c76ce777',
 }
 
-params = urllib.parse.urlencode({
+params = urllib.urlencode({
 })
 
 def emotionAPI(filePath):
@@ -22,7 +22,7 @@ def emotionAPI(filePath):
         chunk = file.read()
         file.close()
 
-        conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
+        conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
         conn.request("POST", "/emotion/v1.0/recognize?%s" % params, chunk, headers)
         response = conn.getresponse()
         data = response.read()
@@ -31,11 +31,12 @@ def emotionAPI(filePath):
         # print ("Response:")
         # print(len(parsed))
         if(len(parsed)>0):
+            conn.close()
             return np.array([parsed[0]["scores"]["anger"], parsed[0]["scores"]["contempt"], parsed[0]["scores"]["disgust"], parsed[0]["scores"]["fear"],
                             parsed[0]["scores"]["happiness"], parsed[0]["scores"]["neutral"], parsed[0]["scores"]["sadness"], parsed[0]["scores"]["surprise"]])
         else :
+            conn.close()
             return np.array([])
-        print (json.dumps(parsed, sort_keys=True, indent=2))
-        conn.close()
     except Exception as e:
-        print(e)
+        print e
+        return np.array([])
