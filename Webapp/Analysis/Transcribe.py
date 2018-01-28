@@ -69,36 +69,33 @@ def transcribe_streaming(stream_file):
                 print('Confidence: {}'.format(alternative.confidence))
                 print('Transcript: {}'.format(alternative.transcript))
 
-#song = AudioSegment.from_wav("audio.wav")
-#song.export("audio.flac",format = "flac")
-sound = AudioSegment.from_wav("audio.wav")
-sound = sound.set_channels(1)
-sound.export("audio_1.wav", format="wav")
-#transcript = transcribe_file("audio_1.wav")
-#print(transcript)
-
-# API for text sentiment analysis
-uri = 'westcentralus.api.cognitive.microsoft.com'
-path = '/text/analytics/v2.0/sentiment'
-
 def GetSentiment (documents):
-    "Gets the sentiments for a set of documents and returns the information."
+        "Gets the sentiments for a set of documents and returns the information."
+        # API for text sentiment analysis
+        uri = 'westcentralus.api.cognitive.microsoft.com'
+        path = '/text/analytics/v2.0/sentiment'
 
-    headers = {'Ocp-Apim-Subscription-Key': textSentimentKey}
-    conn = httplib.HTTPSConnection (uri)
-    body = json.dumps (documents)
-    conn.request ("POST", path, body, headers)
-    response = conn.getresponse ()
-    return response.read ()
+        headers = {'Ocp-Apim-Subscription-Key': textSentimentKey}
+        conn = httplib.HTTPSConnection (uri)
+        body = json.dumps (documents)
+        conn.request ("POST", path, body, headers)
+        response = conn.getresponse ()
+        return response.read ()
 
-documents = { 'documents': [
-    #{ 'id': '1', 'language': 'en', 'text': transcript },
-    { 'id': '2', 'language': 'en', 'text': "Do you want to come for coffee with me?" },
-    { 'id': '3', 'language': 'en', 'text': "i want to hug you" },
-    { 'id': '4', 'language': 'en', 'text': "let's kiss" }
-]}
+def getText(filePath):
+    sound = AudioSegment.from_wav(filePath)
+    sound = sound.set_channels(1)
+    sound.export(filePath, format="wav")
+    transcript = transcribe_file(filePath)
+    print(transcript)
 
-print 'Please wait a moment for the results to appear.\n'
 
-result = GetSentiment (documents)
-print (json.dumps(json.loads(result), indent=4))
+    documents = { 'documents': [
+        #{ 'id': '1', 'language': 'en', 'text': transcript },
+        { 'id': '1', 'language': 'en', 'text': transcript }
+    ]}
+
+    result = GetSentiment (documents)
+    score = json.loads(result)["documents"][0]["score"]
+    print (score)
+    return [transcript, score]
