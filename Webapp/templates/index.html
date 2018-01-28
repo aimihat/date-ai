@@ -70,6 +70,19 @@
 		<script type="text/javascript" src="{{ url_for('static', filename='js/assets/jquery.lettering.js')}}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.fittext.js')}}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.textillate.js')}}"></script>
-
+		<script type="text/javascript" >
+			var speaker_voice;
+			window.speechSynthesis.onvoiceschanged = function() {
+			    allVoices = window.speechSynthesis.getVoices();
+			    speaker_voice = allVoices.filter(function(voice) {
+					 	return voice.name == 'Google UK English Female'; 
+				})[0];
+			};
+			speakText = function(text){
+				var msg = new SpeechSynthesisUtterance(text);
+				msg.voice = speaker_voice;
+				speechSynthesis.speak(msg);
+			}
+		</script>
 	</body>
 </html>

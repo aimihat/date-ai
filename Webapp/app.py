@@ -134,7 +134,7 @@ def audio_save():
 		response = json.loads(r)['output']
 	else:
 		response = hard_coded[text.lower()]
-	url = tts(response,g.session)
+	#url = tts(response,g.session)
 	print(response)
 	return json.dumps({'url':url,'text':text,'response':response})
 
