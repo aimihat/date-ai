@@ -14,13 +14,31 @@ from chatterbot import ChatBot
 
 hard_coded = {
     'hey': 'hi there',
-    'how are you':"I am good, thanks. How are you?",
-    "what is your name":"My name is Shreya. What's your name?",
-    "what's your name":"My name is Shreya. What's your name?",
-    "what are you working":"I am working on my compiler project.",
-    "did you go to the class yesterday":"Yes, I did. It was a very interesting class. I think the professor is really good",
-    "what is your phone number":"I don't have a phone. Sorry!",
-    "how old are you":"I am 20 years old"
+    'hi': 'hi there',
+    'hello': 'hi there',
+    'how are you': 'I am good, thanks. How are you?',
+    'how are things': 'I am good, thanks. How are you?',
+    'how are you doing': 'I am good, thanks. How are you?',
+
+    'Hi, how are you': 'hey I am good.',
+    'Hi how are you': 'hey I am good.',
+    "Hi, how're you": "hey I am good.",
+    'Hi': 'hi there',
+    'Hello': 'hi there',
+    'My name is Manish':'My name is Shreya ',
+    'How are things': 'I am good, thanks. How are you?',
+    'How are you doing': 'I am good, thanks. How are you?',
+    'What is your name': 'My name is Shreya. What is your name?',
+    'what are you working on': 'I am working on my compiler project.',
+    'what are you doing': 'I am working on my compiler project.', 
+    'That is really interesting': 'Thank you.', 
+    'did you go to the class yesterday': 'Yes, I did. It was a very interesting class. I think the professor is really good',
+    'How old are you': 'I am 20 years old'
+    'That sounds really boring.': 'I know. Tell me about it.', 
+    'You should take a break.': 'Yeah you are probably right.', 
+    'Do you want to get coffee?': 'I will let you know.'
+    'What is your phone number': 'I don not have a phone. Sorry!',
+    'Come let us go for drinks.': 'Ok, let me pack up. Yay!'
 }
 
 def set_bot():

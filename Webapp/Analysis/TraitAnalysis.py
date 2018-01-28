@@ -56,8 +56,9 @@ def getSpeedScore(audio_files_dir):
 	if(minLen==0):
 		return 0.75
 	avgWPM = np.mean(np.array(wordCounts[0:minLen])*1.0/np.array(durations[0:minLen]))*60;
-	score = 1-(avgWPM>150)*(avgWPM-150)/100 - (avgWPM<150)*(150-avgWPM)/100
-	score = max(0, score)
+	score = (avgWPM-150)/100 
+	score = max(-1, score)
+	score = min(1, score)
 	return score
 '''
 print("FillerWordsUsed : ",fillerWord('../sessions/31/results_speech.csv'))
