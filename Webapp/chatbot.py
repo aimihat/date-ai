@@ -12,6 +12,10 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
 from chatterbot import ChatBot
 
+hard_coded = {
+    'hey': 'hi there'
+}
+
 def set_bot():
     chatterbot = ChatBot("Date")
     

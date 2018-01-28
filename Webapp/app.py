@@ -9,7 +9,7 @@ import requests
 import json
 import time
 import base64
-from chatbot import bot
+from chatbot import bot, hard_coded
 from gtts import gTTS
 import Analysis.Analyze, Analysis.ImageEmotion, Analysis.Transcribe	
 
@@ -126,7 +126,14 @@ def audio_save():
 
 	#call endpoint to with path to get stt
 	text = Analysis.Analyze.speechToText(directory+'/', 'audio'+str(i)+'.wav')
-	response = str(chatbot.get_response(text))
+	#response = str(chatbot.get_response(text))
+	if not text.lower() in hard_coded:
+		r='http://www.cleverbot.com/getreply'
+		d = {'key':'CC6wwsZu_c50FJ9mMPyRjXHbl7Q','input':text}
+		r = requests.get(r,d).text
+		response = json.loads(r)['output']
+	else:
+		response = hard_coded[text.lower()]
 	url = tts(response,g.session)
 	print(response)
 	return json.dumps({'url':url,'text':text,'response':response})
