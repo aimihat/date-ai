@@ -33,10 +33,10 @@ hard_coded = {
     'what are you doing': 'I am working on my compiler project.', 
     'That is really interesting': 'Thank you.', 
     'did you go to the class yesterday': 'Yes, I did. It was a very interesting class. I think the professor is really good',
-    'How old are you': 'I am 20 years old'
+    'How old are you': 'I am 20 years old',
     'That sounds really boring.': 'I know. Tell me about it.', 
     'You should take a break.': 'Yeah you are probably right.', 
-    'Do you want to get coffee?': 'I will let you know.'
+    'Do you want to get coffee?': 'I will let you know.',
     'What is your phone number': 'I don not have a phone. Sorry!',
     'Come let us go for drinks.': 'Ok, let me pack up. Yay!'
 }
