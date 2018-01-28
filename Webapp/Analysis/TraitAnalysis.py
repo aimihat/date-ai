@@ -52,17 +52,22 @@ def getSpeedScore(audio_files_dir):
 		readCSV = csv.reader(csvfile, delimiter=',')
 		for row in readCSV:
 			wordCounts.append(len(row[1].split()))
-	avgWPM = np.mean(np.array(wordCounts)*1.0/np.array(durations))*60;
-	score = 1-(avgWPM>150)*(avgWPM-150)/100 + (avgWPM<150)*(150-avgWPM)/100
+	minLen = min(len(durations), len(wordCounts));
+	if(minLen==0):
+		return 0.75
+	avgWPM = np.mean(np.array(wordCounts[0:minLen])*1.0/np.array(durations[0:minLen]))*60;
+	score = 1-(avgWPM>150)*(avgWPM-150)/100 - (avgWPM<150)*(150-avgWPM)/100
+	score = max(0, score)
 	return score
 '''
-print("FillerWordsUsed : ",fillerWord('../sessions/128/results_speech.csv'))
-print("intersestScoreSpeech : ", intersestScoreSpeech('../sessions/128/results_speech.csv'))
+print("FillerWordsUsed : ",fillerWord('../sessions/31/results_speech.csv'))
+print("intersestScoreSpeech : ", intersestScoreSpeech('../sessions/31/results_speech.csv'))
 
-print("intersestScoreVideo : ", intersestScoreVideo('../sessions/128/results_image.csv'))
-print("nervousnessScoreVideo : ", nervousnessScoreVideo('../sessions/128/results_image.csv'))
+print("intersestScoreVideo : ", intersestScoreVideo('../sessions/31/results_image.csv'))
+print("nervousnessScoreVideo : ", nervousnessScoreVideo('../sessions/31/results_image.csv'))
 
-print("speedScore : ", getSpeedScore('../sessions/128/'))
+print("speedScore : ", getSpeedScore('../sessions/31/'))
 '''
+
 
 	

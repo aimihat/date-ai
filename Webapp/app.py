@@ -11,7 +11,7 @@ import time
 import base64
 from chatbot import bot, hard_coded
 from gtts import gTTS
-import Analysis.Analyze, Analysis.ImageEmotion, Analysis.Transcribe	
+import Analysis.Analyze, Analysis.ImageEmotion, Analysis.Transcribe, Analysis.TraitAnalysis
 
 
 from flask_bcrypt import check_password_hash, generate_password_hash
@@ -138,6 +138,22 @@ def audio_save():
 	print(response)
 	return json.dumps({'url':url,'text':text,'response':response})
 
+@app.route('/analyze', methods=['POST'])
+def analyze():
+	#print(request.form['image'].split(',')[1].decode('base64'))
+	# audio = base64.b64decode(request.form['audio'])#.split(',')[1])
+	# directory = 'sessions/'+str(g.session)
+	directory = 'sessions/31/'
+	
+	fillers = Analysis.TraitAnalysis.fillerWord(directory + 'results_speech.csv')
+	intersestScoreSpeech = Analysis.TraitAnalysis.intersestScoreSpeech(directory + 'results_speech.csv')
+
+	intersestScoreVideo = Analysis.TraitAnalysis.intersestScoreVideo(directory + 'results_image.csv')
+	nervousnessScoreVideo = Analysis.TraitAnalysis.nervousnessScoreVideo(directory + 'results_image.csv')
+
+	speedScore = Analysis.TraitAnalysis.getSpeedScore(directory)
+	return json.dumps({'fillers':fillers,'intersestScoreSpeech':intersestScoreSpeech,'intersestScoreVideo':intersestScoreVideo,
+						'nervousnessScoreVideo':nervousnessScoreVideo,'speedScore':speedScore})
 
 @app.route('/sessions/<int:sess>/<string:file_name>')
 def serve_audio(sess, file_name):
