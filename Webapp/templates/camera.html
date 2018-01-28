@@ -69,6 +69,37 @@ function takephoto() {
 window.setInterval(function(){
   takephoto()
 }, 5000);
-setTimeout(startRecording, 3000);
-setTimeout(stopRecording, 10000);
+
+// Record based on keyboard hold
+// A map to remember in
+var keysdown = {};
+
+// keydown handler
+$(document).keydown(function(e){
+
+  // Do we already know it's down?
+  if (keysdown[e.keyCode]) {
+      // Ignore it
+      return;
+  }
+
+  // Remember it's down
+  keysdown[e.keyCode] = true;
+
+  // Do our thing
+  switch(e.keyCode){
+    case 32: //left (a)
+
+      startRecording();
+      break;
+
+  }
+});
+
+// keyup handler
+$(document).keyup(function(e){
+	stopRecording();
+  // Remove this key from the map
+  delete keysdown[e.keyCode];
+});
 </script>

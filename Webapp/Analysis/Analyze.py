@@ -1,13 +1,11 @@
-DIR = "../Webapp/sessions/100/";
+#DIR = "../sessions/100/";
 
-import httplib, urllib, base64
+import urllib, base64
 import json
-import ImageEmotion
-import Transcribe
+from Analysis import ImageEmotion, Transcribe
 import numpy as np
 
 import os
-arr = os.listdir(DIR)
 
 
 def processFrame(DIR, fileName):
@@ -18,7 +16,6 @@ def processFrame(DIR, fileName):
 	scores = ImageEmotion.emotionAPI(DIR + fileName);
 	if(scores is None or  len(scores)>0):
 		with open(DIR + "results_image.csv", "a") as myfile:
-			print(scores[0])
 			myfile.write(str(scores[0]));
 			for score in scores:
 				myfile.write("," + str(score));
@@ -38,8 +35,8 @@ def speechToText(DIR, fileName):
 	return text
 
 
-processFrame(DIR, "36.png")
-speechToText(DIR, "audio_1.wav")
+#processFrame(DIR, "36.png")
+#speechToText(DIR, "audio_1.wav")
 
 # resetDirectory(DIR)
 # for i in range(len(arr)):

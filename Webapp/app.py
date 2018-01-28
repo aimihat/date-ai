@@ -8,6 +8,8 @@ import io
 import requests
 import json
 import base64
+from chatbot import tts, set_bot
+import Analysis.Analyze, Analysis.ImageEmotion, Analysis.Transcribe	
 
 
 from flask_bcrypt import check_password_hash, generate_password_hash
@@ -16,7 +18,7 @@ from flask_login import (LoginManager, login_user, logout_user,
 
 
 from flask import Flask, request, session, g, redirect, url_for, abort, \
-	render_template, flash, Markup, jsonify, make_response
+	render_template, flash, Markup, jsonify, make_response, send_from_directory
 
 from werkzeug.contrib.profiler import ProfilerMiddleware
 from xlsxwriter.utility import xl_rowcol_to_cell
@@ -29,6 +31,7 @@ app.config.update(dict(
 ))
 app.config.from_envvar('APP_SETTINGS', silent=True)
 
+chatbot = set_bot()
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -89,8 +92,39 @@ def save_image():
 
 	with open(directory+'/'+str(i)+'.png', "wb") as fh:
 		fh.write(img_data)
+
+	#call endpoint to process last photo
+	Analysis.Analyze.processFrame(directory+'/', str(i)+'.png')
 		
 	return json.dumps(True)
+
+@app.route('/audio_save', methods=['POST'])
+def audio_save():
+	#print(request.form['image'].split(',')[1].decode('base64'))
+	audio = base64.b64decode(request.form['audio'])#.split(',')[1])
+	directory = 'sessions/'+str(g.session)
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+
+	i = 0
+	while os.path.exists(directory+'/audio'+str(i)+'.wav'):
+		i += 1
+
+	with open(directory+'/audio'+str(i)+'.wav', "wb") as fh:
+		fh.write(audio)
+
+	#call endpoint to with path to get stt
+	text = Analysis.Analyze.speechToText(directory+'/', 'audio'+str(i)+'.wav')
+	response = str(chatbot.get_response(text))
+	url = tts(response,g.session)
+		
+	return url
+
+
+@app.route('/sessions/<int:sess>/<string:file_name>')
+def serve_audio(sess, file_name):
+	return send_from_directory('sessions/'+str(sess)+'/',file_name)
+
 
 def dict_factory(cursor, row):
 	d = {}
@@ -98,10 +132,6 @@ def dict_factory(cursor, row):
 		d[col[0]] = row[idx]
 	return d
 
-@app.route('/audio_save', methods=['POST'])
-def audio_save():
-	print(request.form)
-	return json.dumps(True)
 
 @app.route('/camera')
 def camera():

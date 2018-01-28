@@ -107,19 +107,19 @@ DEALINGS IN THE SOFTWARE.
   };
 
   Recorder.setupDownload = function(blob, filename){
-    console.log(blob);
-    var fd = new FormData();
-    fd.append('fname', 'test.wav');
-    fd.append('data', blob);
-    $.ajax({
-      type: 'POST',
-      url: '/audio_save',
-      data: fd,
-      processData: false,
-      contentType: false
-    }).done(function(data) {
-           console.log(data);
-    });
+     var reader = new window.FileReader();
+    reader.readAsDataURL(blob); 
+    reader.onloadend = function() {
+       base64 = reader.result;
+       base64 = base64.split(',')[1];
+       $.post('/audio_save', data={'audio':base64}, function(result){
+        result = result.replace('%22','');
+        console.log('playing'+result)
+        new Audio(result).play() //url is result
+       })
+
+    }
+    
 
     // var url = (window.URL || window.webkitURL).createObjectURL(blob);
     // var link = document.getElementById("save");
