@@ -96,6 +96,10 @@ def getText(filePath):
     ]}
 
     result = GetSentiment (documents)
-    score = json.loads(result)["documents"][0]["score"]
+    score = json.loads(result)["documents"]
+    if score:
+        score = score[0]["score"]
+    else:
+        score = 0.5
     print (score)
     return [transcript, score]

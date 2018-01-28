@@ -105,7 +105,7 @@ DEALINGS IN THE SOFTWARE.
     source.connect(this.node);
     this.node.connect(this.context.destination);   // if the script node is not connected to an output the "onaudioprocess" event is not triggered in chrome.
   };
-
+  var count = 0;
   Recorder.setupDownload = function(blob, filename){
      var reader = new window.FileReader();
     reader.readAsDataURL(blob); 
@@ -113,9 +113,11 @@ DEALINGS IN THE SOFTWARE.
        base64 = reader.result;
        base64 = base64.split(',')[1];
        $.post('/audio_save', data={'audio':base64}, function(result){
-        result = result.replace('%22','');
-        console.log('playing'+result)
-        new Audio(result).play() //url is result
+        result = JSON.parse(result);
+        $('.transcript .text p').html(result['text']+'<br>'+result['response']).textillate();
+        console.log('playing'+result);
+        count++;
+        new Audio(result["url"]+'?'+count.toString()).play() //url is result
        })
 
     }

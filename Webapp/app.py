@@ -7,8 +7,10 @@ from importlib import reload
 import io
 import requests
 import json
+import time
 import base64
-from chatbot import tts, set_bot
+from chatbot import bot
+from gtts import gTTS
 import Analysis.Analyze, Analysis.ImageEmotion, Analysis.Transcribe	
 
 
@@ -31,10 +33,19 @@ app.config.update(dict(
 ))
 app.config.from_envvar('APP_SETTINGS', silent=True)
 
-chatbot = set_bot()
+chatbot = bot()
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+def tts(response, session):
+    path= "sessions/"+str(session)+"/tts.mp3"
+    tts = gTTS(text=response, lang='en')
+    if os.path.exists(path):
+        os.remove(path)
+        print('deleted existing tts')
+    tts.save(path)
+    return path
 
 @app.before_request
 def before_request():
@@ -117,8 +128,8 @@ def audio_save():
 	text = Analysis.Analyze.speechToText(directory+'/', 'audio'+str(i)+'.wav')
 	response = str(chatbot.get_response(text))
 	url = tts(response,g.session)
-		
-	return url
+	print(response)
+	return json.dumps({'url':url,'text':text,'response':response})
 
 
 @app.route('/sessions/<int:sess>/<string:file_name>')

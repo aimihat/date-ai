@@ -6,16 +6,7 @@ Created on Sat Jan 27 14:03:26 2018
 @author: aravind_
 """
 
-from gtts import gTTS
 import os
-def tts(response, session):
-    path= "sessions/"+str(session)+"/tts.mp3"
-    tts = gTTS(text=response, lang='en')
-    if os.path.exists(path):
-        os.remove(path)
-        print('deleted existing tts')
-    tts.save(path)
-    return path
 
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
@@ -106,4 +97,8 @@ def set_bot():
     # Train based on the english conversations corpus
     chatterbot.train("chatterbot.corpus.english.conversations")
 
+    return chatterbot
+
+def bot():
+    chatterbot = ChatBot("Date")
     return chatterbot
