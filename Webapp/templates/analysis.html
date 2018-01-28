@@ -57,7 +57,7 @@ for it to work
 
 <script type="text/javascript">
   $.get('/analyze_api', function(result){
-    if (result['speed'] > 0.5) {
+    if (result['speedScore'] > 0.5) {
     	$('.indicator.speed').text('Too fast')
     }
     else if (result['speedScore'] < -0.5) {
