@@ -115,7 +115,7 @@ DEALINGS IN THE SOFTWARE.
        $.post('/audio_save', data={'audio':base64}, function(result){
         result = JSON.parse(result);
         $('.transcript .texts').append('<li>'+result['text']+'<br>'+result['response']+'</li>')
-        $('.tlt)'.textillate();
+        $('.tlt').textillate();
         console.log('playing'+result);
         count++;
         new Audio(result["url"]+'?'+count.toString()).play() //url is result

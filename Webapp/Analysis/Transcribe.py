@@ -3,7 +3,7 @@ import io
 import os
 import http.client, urllib
 import json
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ichack-6ab4dc2acced.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/aimihat/Desktop/ICHack 2018/Webapp/Analysis/ichack-6ab4dc2acced.json"
 textSentimentKey = '3d885902d9734c0c9a6dd80f87469ca8'
 
 from pydub import AudioSegment

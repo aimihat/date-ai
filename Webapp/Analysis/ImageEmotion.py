@@ -38,5 +38,5 @@ def emotionAPI(filePath):
             conn.close()
             return np.array([])
     except Exception as e:
-        print e
+        print(e)
         return np.array([])

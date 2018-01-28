@@ -55,7 +55,7 @@ def getSpeedScore(audio_files_dir):
 	avgWPM = np.mean(np.array(wordCounts)*1.0/np.array(durations))*60;
 	score = 1-(avgWPM>150)*(avgWPM-150)/100 + (avgWPM<150)*(150-avgWPM)/100
 	return score
-
+'''
 print("FillerWordsUsed : ",fillerWord('../sessions/128/results_speech.csv'))
 print("intersestScoreSpeech : ", intersestScoreSpeech('../sessions/128/results_speech.csv'))
 
@@ -63,6 +63,6 @@ print("intersestScoreVideo : ", intersestScoreVideo('../sessions/128/results_ima
 print("nervousnessScoreVideo : ", nervousnessScoreVideo('../sessions/128/results_image.csv'))
 
 print("speedScore : ", getSpeedScore('../sessions/128/'))
-
+'''
 
 	
