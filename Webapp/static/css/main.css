@@ -1,3 +1,750 @@
+.col {
+  width: 33%;
+  float: left;
+}
+.col.text {
+  font-weight: 100!important;
+  color: white!important;
+  background: url('../images/hands.jpg?v2');;
+}
+.wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.speedometer {
+  overflow: hidden;
+  width: 210px;
+  height: 120px;
+  position: relative;
+  margin: 20px auto;
+}
+.speedometer::after {
+  background-color: #fff;
+  height: 10px;
+  width: 130px;
+  margin: 0 auto;
+  left: 0;
+  bottom: 0;
+  content: '';
+  position: absolute;
+  border-radius: 1px;
+  z-index: 40;
+  right: 0;
+}
+.speedometer .dial {
+  padding-top: 20px;
+  overflow: hidden;
+}
+.speedometer .needle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2px;
+  width: 12px;
+  margin: 0 auto;
+  z-index: 50;
+}
+.speedometer .needle .inner {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMSBUaW55Ly9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLXRpbnkuZHRkIj48c3ZnIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9InRpbnkiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjEycHgiIGhlaWdodD0iMTEzcHgiIHZpZXdCb3g9IjAgMCAxMiAxMTMiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiM2NzY3NjciIGQ9Ik0wLjA2NywxMDYuMzQ0Yy0wLjAxNiwwLjEzNS0wLjAyNCwwLjU0My0wLjAzMiwwLjY4MWwtMC4wMTIsMC40MTFoMC4wMDVjLTAuMDAxLDAtMC4wMTEtMC4xNDYtMC4wMTEtMC4wODFjMC4wMDYsMy4xOSwyLjY4OSw1LjYzNSw1Ljk5NSw1LjYyOWMzLjMwNC0wLjAwNyw1Ljk3OC0yLjY2Niw1Ljk3MS01Ljg1NmMtMC4wMDEtMC40MTUtMC4wNS0wLjg1My0wLjEzNi0xLjI0Mkw2LjAxMiwwLjEyNEwwLjA2NywxMDYuMzQ0eiIvPjwvc3ZnPg==);
+  background-size: 100%;
+  height: 112px;
+  width: 12px;
+  position: relative;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.speedometer .needle .top,
+.speedometer .needle .bottom {
+  display: none;
+  position: absolute;
+}
+.speedometer .needle .top {
+  border-color: transparent;
+}
+.speedometer .needle .bottom {
+  background-color: transparent;
+}
+.speedometer .bar {
+  position: relative;
+  overflow: hidden;
+  height: 95px;
+}
+.speedometer .half-circle {
+  height: 95px;
+  width: 190px;
+  border-radius: 190px 190px 0 0;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.speedometer .half-circle-bg {
+  background-color: #e0f3fc;
+  z-index: 10;
+}
+.speedometer .half-circle-speed {
+  background-color: #ED557A;
+  z-index: 20;
+}
+.speedometer .half-circle-cover {
+  background-color: #fff;
+  height: 65px;
+  width: 130px;
+  border-radius: 190px 190px 0 0;
+  background: #fff;
+  margin: 0 auto;
+  top: auto;
+  bottom: 0;
+  z-index: 30;
+}
+.speedometer .animated {
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+[class*='sm'] .speedometer {
+  width: 130.2px;
+  height: 74.4px;
+  position: relative;
+  margin: 20px auto;
+}
+[class*='sm'] .speedometer::after {
+  height: 6.2px;
+  width: 80.6px;
+}
+[class*='sm'] .speedometer .dial {
+  padding-top: 12.4px;
+}
+[class*='sm'] .speedometer .bar {
+  position: relative;
+  overflow: hidden;
+  height: 58.9px;
+}
+[class*='sm'] .speedometer .half-circle {
+  height: 58.9px;
+  width: 117.8px;
+  border-radius: 117.8px 117.8px 0 0;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+[class*='sm'] .speedometer .half-circle-cover {
+  height: 40.3px;
+  width: 80.6px;
+  border-radius: 117.8px 117.8px 0 0;
+}
+[class*='sm'] .speedometer .needle {
+  width: 7.44px;
+}
+[class*='sm'] .speedometer .needle .inner {
+  height: 69.44px;
+  width: 7.44px;
+}
+
+.scaled-90 .speedometer {
+  width: 189px;
+  height: 108px;
+  position: relative;
+  margin: 20px auto;
+}
+.scaled-90 .speedometer::after {
+  height: 9px;
+  width: 117px;
+}
+.scaled-90 .speedometer .dial {
+  padding-top: 18px;
+}
+.scaled-90 .speedometer .bar {
+  position: relative;
+  overflow: hidden;
+  height: 85.5px;
+}
+.scaled-90 .speedometer .half-circle {
+  height: 85.5px;
+  width: 171px;
+  border-radius: 171px 171px 0 0;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.scaled-90 .speedometer .half-circle-cover {
+  height: 58.5px;
+  width: 117px;
+  border-radius: 171px 171px 0 0;
+}
+.scaled-90 .speedometer .needle {
+  width: 10.8px;
+}
+.scaled-90 .speedometer .needle .inner {
+  height: 100.8px;
+  width: 10.8px;
+}
+
+.scaled-80 .speedometer {
+  width: 168px;
+  height: 96px;
+  position: relative;
+  margin: 20px auto;
+}
+.scaled-80 .speedometer::after {
+  height: 8px;
+  width: 104px;
+}
+.scaled-80 .speedometer .dial {
+  padding-top: 16px;
+}
+.scaled-80 .speedometer .bar {
+  position: relative;
+  overflow: hidden;
+  height: 76px;
+}
+.scaled-80 .speedometer .half-circle {
+  height: 76px;
+  width: 152px;
+  border-radius: 152px 152px 0 0;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.scaled-80 .speedometer .half-circle-cover {
+  height: 52px;
+  width: 104px;
+  border-radius: 152px 152px 0 0;
+}
+.scaled-80 .speedometer .needle {
+  width: 9.6px;
+}
+.scaled-80 .speedometer .needle .inner {
+  height: 89.6px;
+  width: 9.6px;
+}
+
+.scaled-70 .speedometer {
+  width: 147px;
+  height: 84px;
+  position: relative;
+  margin: 20px auto;
+}
+.scaled-70 .speedometer::after {
+  height: 7px;
+  width: 91px;
+}
+.scaled-70 .speedometer .dial {
+  padding-top: 14px;
+}
+.scaled-70 .speedometer .bar {
+  position: relative;
+  overflow: hidden;
+  height: 66.5px;
+}
+.scaled-70 .speedometer .half-circle {
+  height: 66.5px;
+  width: 133px;
+  border-radius: 133px 133px 0 0;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.scaled-70 .speedometer .half-circle-cover {
+  height: 45.5px;
+  width: 91px;
+  border-radius: 133px 133px 0 0;
+}
+.scaled-70 .speedometer .needle {
+  width: 8.4px;
+}
+.scaled-70 .speedometer .needle .inner {
+  height: 78.4px;
+  width: 8.4px;
+}
+
+.scaled-60 .speedometer {
+  width: 126px;
+  height: 72px;
+  position: relative;
+  margin: 20px auto;
+}
+.scaled-60 .speedometer::after {
+  height: 6px;
+  width: 78px;
+}
+.scaled-60 .speedometer .dial {
+  padding-top: 12px;
+}
+.scaled-60 .speedometer .bar {
+  position: relative;
+  overflow: hidden;
+  height: 57px;
+}
+.scaled-60 .speedometer .half-circle {
+  height: 57px;
+  width: 114px;
+  border-radius: 114px 114px 0 0;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.scaled-60 .speedometer .half-circle-cover {
+  height: 39px;
+  width: 78px;
+  border-radius: 114px 114px 0 0;
+}
+.scaled-60 .speedometer .needle {
+  width: 7.2px;
+}
+.scaled-60 .speedometer .needle .inner {
+  height: 67.2px;
+  width: 7.2px;
+}
+
+.scaled-50 .speedometer {
+  width: 105px;
+  height: 60px;
+  position: relative;
+  margin: 20px auto;
+}
+.scaled-50 .speedometer::after {
+  height: 5px;
+  width: 65px;
+}
+.scaled-50 .speedometer .dial {
+  padding-top: 10px;
+}
+.scaled-50 .speedometer .bar {
+  position: relative;
+  overflow: hidden;
+  height: 47.5px;
+}
+.scaled-50 .speedometer .half-circle {
+  height: 47.5px;
+  width: 95px;
+  border-radius: 95px 95px 0 0;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.scaled-50 .speedometer .half-circle-cover {
+  height: 32.5px;
+  width: 65px;
+  border-radius: 95px 95px 0 0;
+}
+.scaled-50 .speedometer .needle {
+  width: 6px;
+}
+.scaled-50 .speedometer .needle .inner {
+  height: 56px;
+  width: 6px;
+}
+
+.percent-100 .speedometer.play .animated,
+.percent-100-sm .speedometer.play .animated {
+  -webkit-animation-name: to-100;
+          animation-name: to-100;
+}
+
+.percent-100-static .animated,
+.percent-100-static-sm .animated {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+.percent-66 .speedometer.play .animated,
+.percent-66-sm .speedometer.play .animated {
+  -webkit-animation-name: to-66;
+          animation-name: to-66;
+}
+
+.percent-66-static .animated,
+.percent-66-static-sm .animated {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transform: rotate(-60.12deg);
+          transform: rotate(-60.12deg);
+}
+
+.percent-60 .speedometer.play .animated,
+.percent-60-sm .speedometer.play .animated {
+  -webkit-animation-name: to-60;
+          animation-name: to-60;
+}
+
+.percent-60-static .animated,
+.percent-60-static-sm .animated {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transform: rotate(-72deg);
+          transform: rotate(-72deg);
+}
+
+.percent-40 .speedometer.play .animated,
+.percent-40-sm .speedometer.play .animated {
+  -webkit-animation-name: to-40;
+          animation-name: to-40;
+}
+
+.percent-40-static .animated,
+.percent-40-static-sm .animated {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transform: rotate(-108deg);
+          transform: rotate(-108deg);
+}
+
+.percent-33 .speedometer.play .animated,
+.percent-33-sm .speedometer.play .animated {
+  -webkit-animation-name: to-33;
+          animation-name: to-33;
+}
+
+.percent-33-static .animated,
+.percent-33-static-sm .animated {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transform: rotate(-120.06deg);
+          transform: rotate(-120.06deg);
+}
+
+.percent-30 .speedometer.play .animated,
+.percent-30-sm .speedometer.play .animated {
+  -webkit-animation-name: to-30;
+          animation-name: to-30;
+}
+
+.percent-30-static .animated,
+.percent-30-static-sm .animated {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transform: rotate(-126deg);
+          transform: rotate(-126deg);
+}
+
+.percent-16 .speedometer.play .animated,
+.percent-16-sm .speedometer.play .animated {
+  -webkit-animation-name: to-16;
+          animation-name: to-16;
+}
+
+.percent-16-static .animated,
+.percent-16-static-sm .animated {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transform: rotate(-150.12deg);
+          transform: rotate(-150.12deg);
+}
+
+@-webkit-keyframes to-100 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@keyframes to-100 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes to-66 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-60.12deg);
+            transform: rotate(-60.12deg);
+  }
+}
+@keyframes to-66 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-60.12deg);
+            transform: rotate(-60.12deg);
+  }
+}
+@-webkit-keyframes to-60 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-72deg);
+            transform: rotate(-72deg);
+  }
+}
+@keyframes to-60 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-72deg);
+            transform: rotate(-72deg);
+  }
+}
+@-webkit-keyframes to-40 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-108deg);
+            transform: rotate(-108deg);
+  }
+}
+@keyframes to-40 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-108deg);
+            transform: rotate(-108deg);
+  }
+}
+@-webkit-keyframes to-33 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-120.06deg);
+            transform: rotate(-120.06deg);
+  }
+}
+@keyframes to-33 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-120.06deg);
+            transform: rotate(-120.06deg);
+  }
+}
+@-webkit-keyframes to-30 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-126deg);
+            transform: rotate(-126deg);
+  }
+}
+@keyframes to-30 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-126deg);
+            transform: rotate(-126deg);
+  }
+}
+@-webkit-keyframes to-16 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-150.12deg);
+            transform: rotate(-150.12deg);
+  }
+}
+@keyframes to-16 {
+  0% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-150.12deg);
+            transform: rotate(-150.12deg);
+  }
+}
+@media (max-width: 71.875em) {
+  .speedometer {
+    width: 189px;
+    height: 108px;
+    position: relative;
+    margin: 20px auto;
+  }
+  .speedometer::after {
+    height: 9px;
+    width: 117px;
+  }
+  .speedometer .dial {
+    padding-top: 18px;
+  }
+  .speedometer .bar {
+    position: relative;
+    overflow: hidden;
+    height: 85.5px;
+  }
+  .speedometer .half-circle {
+    height: 85.5px;
+    width: 171px;
+    border-radius: 171px 171px 0 0;
+    -webkit-transform-origin: bottom center;
+            transform-origin: bottom center;
+  }
+  .speedometer .half-circle-cover {
+    height: 58.5px;
+    width: 117px;
+    border-radius: 171px 171px 0 0;
+  }
+  .speedometer .needle {
+    width: 10.8px;
+  }
+  .speedometer .needle .inner {
+    height: 100.8px;
+    width: 10.8px;
+  }
+}
+@media (max-width: 64.0625em) {
+  .speedometer {
+    width: 168px;
+    height: 96px;
+    position: relative;
+    margin: 20px auto;
+  }
+  .speedometer::after {
+    height: 8px;
+    width: 104px;
+  }
+  .speedometer .dial {
+    padding-top: 16px;
+  }
+  .speedometer .bar {
+    position: relative;
+    overflow: hidden;
+    height: 76px;
+  }
+  .speedometer .half-circle {
+    height: 76px;
+    width: 152px;
+    border-radius: 152px 152px 0 0;
+    -webkit-transform-origin: bottom center;
+            transform-origin: bottom center;
+  }
+  .speedometer .half-circle-cover {
+    height: 52px;
+    width: 104px;
+    border-radius: 152px 152px 0 0;
+  }
+  .speedometer .needle {
+    width: 9.6px;
+  }
+  .speedometer .needle .inner {
+    height: 89.6px;
+    width: 9.6px;
+  }
+}
+@media (max-width: 56.25em) {
+  .speedometer {
+    width: 147px;
+    height: 84px;
+    position: relative;
+    margin: 20px auto;
+  }
+  .speedometer::after {
+    height: 7px;
+    width: 91px;
+  }
+  .speedometer .dial {
+    padding-top: 14px;
+  }
+  .speedometer .bar {
+    position: relative;
+    overflow: hidden;
+    height: 66.5px;
+  }
+  .speedometer .half-circle {
+    height: 66.5px;
+    width: 133px;
+    border-radius: 133px 133px 0 0;
+    -webkit-transform-origin: bottom center;
+            transform-origin: bottom center;
+  }
+  .speedometer .half-circle-cover {
+    height: 45.5px;
+    width: 91px;
+    border-radius: 133px 133px 0 0;
+  }
+  .speedometer .needle {
+    width: 8.4px;
+  }
+  .speedometer .needle .inner {
+    height: 78.4px;
+    width: 8.4px;
+  }
+}
+@media (max-width: 51.5625em) {
+  .speedometer {
+    width: 126px;
+    height: 72px;
+    position: relative;
+    margin: 20px auto;
+  }
+  .speedometer::after {
+    height: 6px;
+    width: 78px;
+  }
+  .speedometer .dial {
+    padding-top: 12px;
+  }
+  .speedometer .bar {
+    position: relative;
+    overflow: hidden;
+    height: 57px;
+  }
+  .speedometer .half-circle {
+    height: 57px;
+    width: 114px;
+    border-radius: 114px 114px 0 0;
+    -webkit-transform-origin: bottom center;
+            transform-origin: bottom center;
+  }
+  .speedometer .half-circle-cover {
+    height: 39px;
+    width: 78px;
+    border-radius: 114px 114px 0 0;
+  }
+  .speedometer .needle {
+    width: 7.2px;
+  }
+  .speedometer .needle .inner {
+    height: 67.2px;
+    width: 7.2px;
+  }
+}
+
 .heart {
   background-color: #ED5D7D;
   display: inline-block;

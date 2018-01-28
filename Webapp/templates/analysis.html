@@ -1,0 +1,89 @@
+<!-- This page includes the camera and and all 
+start chrome with --unsafely-treat-insecure-origin-as-secure="example.com"
+for it to work
+-->
+<h3 class="level">WELL DONE!</h3>
+
+<div class="container">
+	<div class="col">
+		<div>
+			<h3>Talking speed</h3>
+			<p class="speed indicator">Too fast</p>
+		</div>
+		<div>
+			<h3>Engagement</h3>
+			<p class="engagement indicator">23/100</p>
+		</div>
+	</div>
+	<div class="col text">
+		<h2>CONGRATS, YOU ARE ONE STEP CLOSER TO GETTING ALL THE GOOD GIRLS</h2>
+	</div>
+	<div class="col">
+		<div>
+			<h3>Enthusiasm</h3>
+			<p class="indicator enthusiasm">23/100</p>
+		</div>
+		<div>
+			<h3>Confidence</h3>
+			<p class="indicator confidence">60/100</p>
+		</div>
+	</div>
+</div>
+<h2>Overall score:</h2>
+<div class="wrapper">
+  <div class="percent-66">
+    <div class="speedometer play">
+      <div class="dial">
+        <div class="bar">
+          <div class="half-circle half-circle-bg"></div>
+          <div class="half-circle half-circle-speed animated"></div>
+          <div class="half-circle half-circle-cover"></div>
+        </div>
+        <div class="needle animated">
+          <div class="inner">
+            <div class="top"></div>
+            <div class="bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3>63%</h3>
+<div>
+	<h2>Look to improve</h2>
+	<p></p>
+</div>
+
+<script type="text/javascript">
+  $.get('/analyze_api', function(result){
+    if (result['speed'] > 0.5) {
+    	$('.indicator.speed').text('Too fast')
+    }
+    else if (result['speedScore'] < -0.5) {
+    	$('.indicator.speed').text('Too slow')
+    } else {
+    	$('.indicator.speed').text('Good pace')
+    }
+    var engagement = result['intersestScoreVideo']*100;
+    $('.indicator.engagement').text(engagement.toString()+'/100');
+    var confidence = (1-result['nervousnessScoreVideo'])*100;
+    $('.indicator.confidence').text(confidence.toString()+'/100');
+    var enthusiasm = result['intersestScoreSpeech']*100;
+    $('.indicator.enthusiasm').text(enthusiasm.toString()+'/100');
+  });
+
+var speed = {
+	'trigger': '#speed-compare',
+	'target':'.modal_content .speedometer'
+};
+function() {
+	$(speed.trigger).on('click', function() {
+		setTimeout( function() { 
+			$(speed.target).each(function() {
+				$(this).addClass('play');
+			})
+		}, 1000);
+	})
+}
+</script>

@@ -138,11 +138,11 @@ def audio_save():
 	print(response)
 	return json.dumps({'url':url,'text':text,'response':response})
 
-@app.route('/analyze', methods=['POST'])
-def analyze():
+@app.route('/analyze_api', methods=['GET'])
+def analyze_api():
 	#print(request.form['image'].split(',')[1].decode('base64'))
 	# audio = base64.b64decode(request.form['audio'])#.split(',')[1])
-	directory = 'sessions/'+str(g.session)
+	directory = 'sessions/'+str(g.session)+'/'
 	# directory = 'sessions/31/'
 	
 	fillers = Analysis.TraitAnalysis.fillerWord(directory + 'results_speech.csv')
@@ -154,6 +154,10 @@ def analyze():
 	speedScore = Analysis.TraitAnalysis.getSpeedScore(directory)
 	return json.dumps({'fillers':fillers,'intersestScoreSpeech':intersestScoreSpeech,'intersestScoreVideo':intersestScoreVideo,
 						'nervousnessScoreVideo':nervousnessScoreVideo,'speedScore':speedScore})
+
+@app.route('/analyze')
+def analyze():
+	return render_template('/analysis.html')
 
 @app.route('/sessions/<int:sess>/<string:file_name>')
 def serve_audio(sess, file_name):

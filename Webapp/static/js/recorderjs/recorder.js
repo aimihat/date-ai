@@ -118,7 +118,7 @@ DEALINGS IN THE SOFTWARE.
         console.log('playing'+result);
         count++;
         console.log(count);
-        if (count > 4) {
+        if (count > 5) {
         
         $(".achievement").css('opacity','1');
        }

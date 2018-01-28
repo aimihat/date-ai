@@ -119,4 +119,11 @@ $(document).keyup(function(e){
   // Remove this key from the map
   delete keysdown[e.keyCode];
 });
+$('.achievement').click(function(){
+	$.get('/analyze',function(result){
+		$(".banner-area .container .row").html(result);
+    $(".banner-area").css('background','transparent');
+	})
+	
+})
 </script>
