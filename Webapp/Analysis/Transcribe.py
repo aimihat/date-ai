@@ -1,9 +1,9 @@
 import argparse
 import io
 import os
-import http.client, urllib
+import httplib, urllib
 import json
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/aimihat/Desktop/ICHack 2018/Webapp/Analysis/ichack-6ab4dc2acced.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ichack-6ab4dc2acced.json"
 textSentimentKey = '3d885902d9734c0c9a6dd80f87469ca8'
 
 from pydub import AudioSegment
@@ -21,7 +21,7 @@ def transcribe_file(speech_file):
 
     audio = types.RecognitionAudio(content=content)
     config = types.RecognitionConfig(
-        language_code='en-UK')
+        language_code='en-IE')
 
     response = client.recognize(config, audio)
     # Each result is for a consecutive portion of the audio. Iterate through
@@ -30,7 +30,7 @@ def transcribe_file(speech_file):
     for result in response.results:
         # The first alternative is the most likely one for this portion.
         part = (result.alternatives[0].transcript)
-        print('Transcript: '+part)
+        # print('Transcript: '+part)
         text = text+ part
     return text
 
@@ -76,7 +76,7 @@ def GetSentiment (documents):
         path = '/text/analytics/v2.0/sentiment'
 
         headers = {'Ocp-Apim-Subscription-Key': textSentimentKey}
-        conn = http.client.HTTPSConnection (uri)
+        conn = httplib.HTTPSConnection (uri)
         body = json.dumps (documents)
         conn.request ("POST", path, body, headers)
         response = conn.getresponse ()
@@ -96,9 +96,8 @@ def getText(filePath):
     ]}
 
     result = GetSentiment (documents)
-    score = json.loads(result)["documents"]
-    if score:
-        score = score[0]["score"]
+    if(len(json.loads(result)["documents"])>0):
+        score = json.loads(result)["documents"][0]["score"]
     else:
         score = 0.5
     print (score)
