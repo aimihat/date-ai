@@ -16,7 +16,7 @@ def processFrame(DIR, fileName):
 		return;
 	# Scores are for (anger, contempt, disgust, fear, happiness, neutral, sadness, surprise)
 	scores = ImageEmotion.emotionAPI(DIR + fileName);
-	if(scores is not None or  len(scores)>0):
+	if(scores is not None and len(scores)>0):
 		with open(DIR + "results_image.csv", "a") as myfile:
 			print(scores[0])
 			myfile.write(str(scores[0]));

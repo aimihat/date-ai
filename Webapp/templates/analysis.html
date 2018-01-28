@@ -56,34 +56,40 @@ for it to work
 </div>
 
 <script type="text/javascript">
+	var stats
   $.get('/analyze_api', function(result){
-    if (result['speedScore'] > 0.5) {
+  	stats = result;
+  	console.log('stats')
+  }).done(function(){
+  	if (stats.speedScore+0.35 > 0.5) {
     	$('.indicator.speed').text('Too fast')
     }
-    else if (result['speedScore'] < -0.5) {
+    else if (stats.speedScore+0.35 < -0.5) {
     	$('.indicator.speed').text('Too slow')
     } else {
     	$('.indicator.speed').text('Good pace')
     }
-    var engagement = result['intersestScoreVideo']*100;
+    console.log(stats);
+    var engagement = stats.intersestScoreVideo*100;
     $('.indicator.engagement').text(engagement.toString()+'/100');
-    var confidence = (1-result['nervousnessScoreVideo'])*100;
+    var confidence = (1-stats.nervousnessScoreVideo)*100;
     $('.indicator.confidence').text(confidence.toString()+'/100');
-    var enthusiasm = result['intersestScoreSpeech']*100;
+    var enthusiasm = stats['intersestScoreSpeech']*100;
     $('.indicator.enthusiasm').text(enthusiasm.toString()+'/100');
-  });
 
+  });
+  
 var speed = {
 	'trigger': '#speed-compare',
 	'target':'.modal_content .speedometer'
 };
-function() {
-	$(speed.trigger).on('click', function() {
-		setTimeout( function() { 
-			$(speed.target).each(function() {
-				$(this).addClass('play');
-			})
-		}, 1000);
-	})
-}
+
+$(speed.trigger).on('click', function() {
+	setTimeout( function() { 
+		$(speed.target).each(function() {
+			$(this).addClass('play');
+		})
+	}, 1000);
+})
+
 </script>

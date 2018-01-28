@@ -136,7 +136,7 @@ def audio_save():
 		response = hard_coded[text.lower()]
 	#url = tts(response,g.session)
 	print(response)
-	return json.dumps({'url':url,'text':text,'response':response})
+	return json.dumps({'text':text,'response':response})
 
 @app.route('/analyze_api', methods=['GET'])
 def analyze_api():
@@ -147,9 +147,11 @@ def analyze_api():
 	
 	fillers = Analysis.TraitAnalysis.fillerWord(directory + 'results_speech.csv')
 	intersestScoreSpeech = Analysis.TraitAnalysis.intersestScoreSpeech(directory + 'results_speech.csv')
-
+	intersestScoreSpeech = round(intersestScoreSpeech,2)
 	intersestScoreVideo = Analysis.TraitAnalysis.intersestScoreVideo(directory + 'results_image.csv')
+	intersestScoreVideo = round(intersestScoreVideo,2)
 	nervousnessScoreVideo = Analysis.TraitAnalysis.nervousnessScoreVideo(directory + 'results_image.csv')
+	nervousnessScoreVideo = round(nervousnessScoreVideo,2)
 
 	speedScore = Analysis.TraitAnalysis.getSpeedScore(directory)
 	return json.dumps({'fillers':fillers,'intersestScoreSpeech':intersestScoreSpeech,'intersestScoreVideo':intersestScoreVideo,

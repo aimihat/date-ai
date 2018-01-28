@@ -118,11 +118,14 @@ DEALINGS IN THE SOFTWARE.
         console.log('playing'+result);
         count++;
         console.log(count);
+        speakText(result["response"])
         if (count > 5) {
         
         $(".achievement").css('opacity','1');
+        speakText("What's your number? We could go have dinner some day in the huxley?")
        }
-        new Audio(result["url"]+'?'+count.toString()).play() //url is result
+        
+        //new Audio(result["url"]+'?'+count.toString()).play() //url is result
        })
 
     }
