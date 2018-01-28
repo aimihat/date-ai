@@ -1,14 +1,22 @@
-.col {
-  width: 33%;
-  float: left;
+.indicator {
+  font-size:20px;
+  }
+  .col {
+      width: 33%;
+    /* float: left; */
+    display: inline-block;
+    height: 255px;
+    padding: 0!important;
 }
-.col.text {
+.col.text h2{
   font-weight: 100!important;
   color: white!important;
-  background: url('../images/hands.jpg?v2');;
+}
+.wrapper h2 {
+  text-decoration: underline;
 }
 .wrapper {
-  position: absolute;
+  margin-top: 62px;
   left: 0;
   right: 0;
   top: 50%;

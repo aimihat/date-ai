@@ -16,7 +16,7 @@ for it to work
 		</div>
 	</div>
 	<div class="col text">
-		<h2>CONGRATS, YOU ARE ONE STEP CLOSER TO GETTING ALL THE GOOD GIRLS</h2>
+		<h2>CONGRATS, YOU ARE ONE STEP CLOSER TO DELETING YOUR TINDER</h2>
 	</div>
 	<div class="col">
 		<div>
@@ -29,8 +29,10 @@ for it to work
 		</div>
 	</div>
 </div>
-<h2>Overall score:</h2>
 <div class="wrapper">
+
+<h2>Overall score:</h2>
+<h3 class="overallScore">63%</h3>
   <div class="percent-66">
     <div class="speedometer play">
       <div class="dial">
@@ -48,17 +50,54 @@ for it to work
       </div>
     </div>
   </div>
-</div>
-<h3>63%</h3>
-<div>
+  <div>
 	<h2>Look to improve</h2>
-	<p></p>
+	<p class="advice"></p>
+</div>
 </div>
 
+
 <script type="text/javascript">
+	var getAdviceFromScores = function(fillerWords, intersestScoreSpeech, intersestScoreVideo, nervousnessScoreVideo, speedScore, overallScore){
+	message = "";
+	if(overallScore<0.5)
+		message = message + "You will get better with time."
+	else if(overallScore<0.6)
+		message = message + "That was not bad at all!"
+	else if(overallScore<0.7)
+		message = message + "You are good!"
+	else if(overallScore<0.8)
+		message = message + "That was impressive!"
+	else
+		message = message + "That was an excellent conversation! This guy fucks ;)"
+
+	if(fillerWords.length>0){
+		message = message + " Try to avoid the over-usage of filler words eg-";
+		for (var i =0; i<fillerWords.length; i++)
+			message = message + " '" + fillerWords[i][0]+"'";
+		message = message + ".";
+	}
+	if(intersestScoreSpeech<0.6)
+		message = message + " Try using phrases like 'wow', 'great' etc, so that other person knows you find talking to them interesting.";
+
+	if(intersestScoreVideo<0.6)
+		message = message + " You should be a bit more expression-full while talking to them.";
+
+	if(nervousnessScoreVideo>0.1)
+		message = message + " You looked a bit nervous. Try being more confident?";
+
+	if(speedScore>0.5)
+		message = message + " You talking was very fast-paced. Try slowing down?";
+	
+	if(Math.random()<0.5)
+		message = message + " Good luck for the next one!";
+	else
+		message = message + " May the charm be with you!";
+	return message;
+}
 	var stats
   $.get('/analyze_api', function(result){
-  	stats = result;
+  	stats = JSON.parse(result);
   	console.log('stats')
   }).done(function(){
   	if (stats.speedScore+0.35 > 0.5) {
@@ -68,17 +107,21 @@ for it to work
     	$('.indicator.speed').text('Too slow')
     } else {
     	$('.indicator.speed').text('Good pace')
+    	$('.indicator.speed').css('color','#00c100')
     }
     console.log(stats);
     var engagement = stats.intersestScoreVideo*100;
-    $('.indicator.engagement').text(engagement.toString()+'/100');
+    $('.indicator.engagement').text(engagement.toString()+'%');
     var confidence = (1-stats.nervousnessScoreVideo)*100;
-    $('.indicator.confidence').text(confidence.toString()+'/100');
+    $('.indicator.confidence').text(confidence.toString()+'%');
     var enthusiasm = stats['intersestScoreSpeech']*100;
-    $('.indicator.enthusiasm').text(enthusiasm.toString()+'/100');
-
+    $('.indicator.enthusiasm').text(enthusiasm.toString()+'%');
+    var overallScore = Math.round((enthusiasm+confidence+engagement+(1-Math.abs(stats.speedScore+0.35))*100)/4);
+    console.log(overallScore)
+    $('.overallScore').text(overallScore.toString()+'%');
+    $('.advice').text(getAdviceFromScores(stats.fillers, stats.intersestScoreSpeech, stats.intersestScoreVideo, stats.nervousnessScoreVideo, stats.speedScore, overallScore))
   });
-  
+
 var speed = {
 	'trigger': '#speed-compare',
 	'target':'.modal_content .speedometer'

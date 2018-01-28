@@ -149,9 +149,7 @@ def analyze_api():
 	intersestScoreSpeech = Analysis.TraitAnalysis.intersestScoreSpeech(directory + 'results_speech.csv')
 	intersestScoreSpeech = round(intersestScoreSpeech,2)
 	intersestScoreVideo = Analysis.TraitAnalysis.intersestScoreVideo(directory + 'results_image.csv')
-	intersestScoreVideo = round(intersestScoreVideo,2)
 	nervousnessScoreVideo = Analysis.TraitAnalysis.nervousnessScoreVideo(directory + 'results_image.csv')
-	nervousnessScoreVideo = round(nervousnessScoreVideo,2)
 
 	speedScore = Analysis.TraitAnalysis.getSpeedScore(directory)
 	return json.dumps({'fillers':fillers,'intersestScoreSpeech':intersestScoreSpeech,'intersestScoreVideo':intersestScoreVideo,

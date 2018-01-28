@@ -122,7 +122,7 @@ DEALINGS IN THE SOFTWARE.
         if (count > 5) {
         
         $(".achievement").css('opacity','1');
-        speakText("What's your number? We could go have dinner some day in the huxley?")
+        speakText("What's your number? We could go have dinner some day in huxley?")
        }
         
         //new Audio(result["url"]+'?'+count.toString()).play() //url is result
