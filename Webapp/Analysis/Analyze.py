@@ -1,11 +1,11 @@
 DIR = "../sessions/100/";
 
-import httplib, urllib, base64
+import http.client, urllib, base64
 import json
-import ImageEmotion
-import Transcribe
+from Analysis import  ImageEmotion
+from Analysis import  Transcribe
 import numpy as np
-import TraitAnalysis
+from Analysis import TraitAnalysis
 
 import os
 

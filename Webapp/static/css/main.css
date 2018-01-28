@@ -29,6 +29,11 @@
 .banner-area .container {
   padding-top: 25px;
 }
+.tlt p {
+    font-size: 20px;
+    text-transform: lowercase;
+    margin-top: 10px;
+}
 h3.level {
   color: #9E1E3A;
 }

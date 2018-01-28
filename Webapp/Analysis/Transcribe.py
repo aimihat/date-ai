@@ -1,7 +1,7 @@
 import argparse
 import io
 import os
-import httplib, urllib
+import http.client, urllib
 import json
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ichack-6ab4dc2acced.json"
 textSentimentKey = '3d885902d9734c0c9a6dd80f87469ca8'
@@ -76,7 +76,7 @@ def GetSentiment (documents):
         path = '/text/analytics/v2.0/sentiment'
 
         headers = {'Ocp-Apim-Subscription-Key': textSentimentKey}
-        conn = httplib.HTTPSConnection (uri)
+        conn = http.client.HTTPSConnection (uri)
         body = json.dumps (documents)
         conn.request ("POST", path, body, headers)
         response = conn.getresponse ()

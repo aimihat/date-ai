@@ -1,5 +1,5 @@
 ########### Python 2.7 #############
-import httplib, urllib, base64
+import http.client, urllib, base64
 import json
 import numpy as np
 
@@ -9,7 +9,7 @@ headers = {
     'Ocp-Apim-Subscription-Key': '3ce0e2d17845482c9587c8b4c76ce777',
 }
 
-params = urllib.urlencode({
+params = urllib.parse.urlencode({
 })
 
 def emotionAPI(filePath):
@@ -22,7 +22,7 @@ def emotionAPI(filePath):
         chunk = file.read()
         file.close()
 
-        conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
+        conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
         conn.request("POST", "/emotion/v1.0/recognize?%s" % params, chunk, headers)
         response = conn.getresponse()
         data = response.read()
