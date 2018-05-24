@@ -84,5 +84,23 @@
 				speechSynthesis.speak(msg);
 			}
 		</script>
+		<script type="text/javascript" >
+			<!-- Speech to text using webspeech API -->
+			var recognition = new webkitSpeechRecognition();
+			recognition.continuous = true;
+			recognition.interimResults = true;
+			recognition.lang = "en";
+
+			recognition.onresult = function (event) {
+				for (var i = event.resultIndex; i < event.results.length; ++i) {
+					if (event.results[i].isFinal) {
+						prevMessage = $('.transcript .text p').html();
+						$('.transcript .text p').html(prevMessage + " " + event.results[i][0].transcript);
+					}
+				}
+			};
+
+			<!-- to start and stop, call recognition.start();, recognition.stop();-->
+		</script>
 	</body>
 </html>

@@ -17,7 +17,7 @@ def fillerWord(speech_results_path):
 		readCSV = csv.reader(csvfile, delimiter=',')
 		for row in readCSV:
 			for i in range(len(FILLER_WORDS)):
-				filler_counts[i] = filler_counts[i] + row[1].count(FILLER_WORDS[i]);
+				filler_counts[i] = filler_counts[i] + row[2].count(FILLER_WORDS[i]);
 	ret = []
 	for i in range(len(FILLER_WORDS)):
 		if(filler_counts[i]>=3):
@@ -39,20 +39,15 @@ def nervousnessScoreVideo(image_results_path):
 ############################### Features Based on Audio Information ###############################
 def getSpeedScore(audio_files_dir):
 	durations = [];
-	for i in range(1000):
-		fname = audio_files_dir+"audio"+str(i)+".wav"
-		if(os.path.exists(fname)):
-			with contextlib.closing(wave.open(fname,'r')) as f:
-				frames = f.getnframes()
-				rate = f.getframerate()
-				duration = frames / float(rate)
-				durations.append(duration)
+
 	speech_results_path = audio_files_dir+"results_speech.csv"
 	wordCounts = [];
 	with open(speech_results_path) as csvfile:
 		readCSV = csv.reader(csvfile, delimiter=',')
 		for row in readCSV:
-			wordCounts.append(len(row[1].split()))
+			wordCounts.append(len(row[2].split()))
+			durations.append(int(row[1])/1000.0)
+
 	minLen = min(len(durations), len(wordCounts));
 	if(minLen==0):
 		return 0.75

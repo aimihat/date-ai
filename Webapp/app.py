@@ -112,21 +112,14 @@ def save_image():
 @app.route('/audio_save', methods=['POST'])
 def audio_save():
 	#print(request.form['image'].split(',')[1].decode('base64'))
-	audio = base64.b64decode(request.form['audio'])#.split(',')[1])
-	directory = 'sessions/'+str(g.session)
-	if not os.path.exists(directory):
-		os.makedirs(directory)
 
-	i = 0
-	while os.path.exists(directory+'/audio'+str(i)+'.wav'):
-		i += 1
+	text = request.form['message'];
+	textDuration = request.form['duration'];
 
-	with open(directory+'/audio'+str(i)+'.wav', "wb") as fh:
-		fh.write(audio)
+	Analysis.Transcribe.processText('sessions/'+str(g.session) + '/', text, textDuration);
 
-	#call endpoint to with path to get stt
-	text = Analysis.Analyze.speechToText(directory+'/', 'audio'+str(i)+'.wav')
-	#response = str(chatbot.get_response(text))
+	print("In audio_save, message = "+text)
+
 	if not text.lower().strip().replace(",","").replace(".","") in hard_coded:
 		r='http://www.cleverbot.com/getreply'
 		d = {'key':'CC6wwsZu_c50FJ9mMPyRjXHbl7Q','input':text}
@@ -137,6 +130,8 @@ def audio_save():
 	#url = tts(response,g.session)
 	print(response)
 	return json.dumps({'text':text,'response':response})
+
+
 
 @app.route('/analyze_api', methods=['GET'])
 def analyze_api():

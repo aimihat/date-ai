@@ -90,6 +90,7 @@ window.setInterval(function(){
 // Record based on keyboard hold
 // A map to remember in
 var keysdown = {};
+var count = 0;
 
 // keydown handler
 $(document).keydown(function(e){
@@ -107,7 +108,10 @@ $(document).keydown(function(e){
   switch(e.keyCode){
     case 32: //left (a)
 
-      startRecording();
+      //startRecording();
+      recognition.start();
+      startTimestamp = Date.now()
+      $('.transcript .text p').html("")
       break;
 
   }
@@ -115,7 +119,26 @@ $(document).keydown(function(e){
 
 // keyup handler
 $(document).keyup(function(e){
-	stopRecording();
+	//stopRecording();
+	recognition.stop();
+	setTimeout(function(){
+	$.post('/audio_save', data={'message':$('.transcript .text p').html(), 'duration':Date.now()-startTimestamp}, function(result){
+        result = JSON.parse(result);
+        $('.transcript .text p').html(result['text']+"<br>"+result['response']);
+        console.log('playing'+result);
+        count++;
+        console.log(count);
+        speakText(result["response"])
+        if (count > 4) {
+			count=0;
+        $(".achievement").css('opacity','1');
+        //speakText("What's your number? We could go have dinner some day in huxley?")
+       }
+
+        //new Audio(result["url"]+'?'+count.toString()).play() //url is result
+       })
+    }, 1000);
+
   // Remove this key from the map
   delete keysdown[e.keyCode];
 });

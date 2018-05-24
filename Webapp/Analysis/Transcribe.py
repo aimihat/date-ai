@@ -3,6 +3,8 @@ import io
 import os
 import http.client, urllib
 import json
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/aimihat/Desktop/ICHack 2018/Webapp/Analysis/ichack-6ab4dc2acced.json"
 textSentimentKey = '3d885902d9734c0c9a6dd80f87469ca8'
 
@@ -80,25 +82,19 @@ def GetSentiment (documents):
         body = json.dumps (documents)
         conn.request ("POST", path, body, headers)
         response = conn.getresponse ()
-        return response.read ()
+        return response.read()
 
-def getText(filePath):
-    sound = AudioSegment.from_wav(filePath)
-    sound = sound.set_channels(1)
-    sound.export(filePath, format="wav")
-    transcript = transcribe_file(filePath)
-    print(transcript)
+def processText(path, text, duration):
+    sid = SentimentIntensityAnalyzer()
+    score = sid.polarity_scores(text)['compound']
 
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-    documents = { 'documents': [
-        #{ 'id': '1', 'language': 'en', 'text': transcript },
-        { 'id': '1', 'language': 'en', 'text': transcript }
-    ]}
-
-    result = GetSentiment (documents)
-    if(len(json.loads(result)["documents"])>0):
-        score = json.loads(result)["documents"][0]["score"]
+    if os.path.exists(path + "results_speech.csv"):
+        append_write = 'a'  # append if already exists
     else:
-        score = 0.5
-    print (score)
-    return [transcript, score]
+        append_write = 'w'  # make a new file if not
+
+    with open(path + "results_speech.csv", append_write) as myfile:
+        myfile.write(str(score) + "," + duration + "," + text + "\n");
